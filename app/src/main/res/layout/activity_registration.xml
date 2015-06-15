@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    tools:context="com.amgeneralinsurance.amgsalesplanner.RegistrationActivity"
+    android:background="@drawable/bg">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutLogoLayout"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical" >
+        <EditText
+            android:id="@+id/EditTextFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:padding="5dp"
+            android:background="@android:color/white"/>
+
+        <EditText
+            android:id="@+id/EditTextLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:padding="5dp"
+            android:background="@android:color/white"/>
+
+        <EditText
+            android:id="@+id/EditTextMobileNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Mobile No."
+            android:inputType="textPersonName"
+            android:padding="5dp"
+            android:background="@android:color/white"/>
+
+        <EditText
+            android:id="@+id/EditTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Email Id"
+            android:inputType="textPersonName"
+            android:padding="5dp"
+            android:background="@android:color/white"/>
+
+        <EditText
+            android:id="@+id/EditTextManagerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Manager Email"
+            android:inputType="textPersonName"
+            android:padding="5dp"
+            android:background="@android:color/white"/>
+
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/button_color"
+            android:padding="5dp"
+            android:text="Register"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:onClick="login" />
+    </LinearLayout>
+</RelativeLayout>
