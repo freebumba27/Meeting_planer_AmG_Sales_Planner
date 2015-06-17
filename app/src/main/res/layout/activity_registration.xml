@@ -5,7 +5,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    android:gravity="center_vertical"
     tools:context="com.amgeneralinsurance.amgsalesplanner.RegistrationActivity"
     android:background="@drawable/bg">
 
@@ -14,9 +13,21 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textViewLoginTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:text="Register Me"
+            android:textColor="@android:color/secondary_text_light"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/EditTextFirstName"
             android:layout_width="match_parent"
@@ -37,22 +48,22 @@
             android:background="@android:color/white"/>
 
         <EditText
-            android:id="@+id/EditTextMobileNo"
+            android:id="@+id/EditTextEmployeeId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:hint="Mobile No."
+            android:hint="Employee ID"
             android:inputType="textPersonName"
             android:padding="5dp"
             android:background="@android:color/white"/>
 
         <EditText
-            android:id="@+id/EditTextEmail"
+            android:id="@+id/EditTextMobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:hint="Email Id"
-            android:inputType="textPersonName"
+            android:hint="Mobile No"
+            android:inputType="phone"
             android:padding="5dp"
             android:background="@android:color/white"/>
 
@@ -62,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:hint="Manager Email"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:padding="5dp"
             android:background="@android:color/white"/>
 

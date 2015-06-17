@@ -51,7 +51,7 @@ public class ListOfAgentActivity extends AppCompatActivity {
                 Log.d("TAG", "value: " + data.get(position).get("First Line"));
                 Log.d("TAG", "value: " + data.get(position).get("Second Line"));
 
-                Intent i = new Intent(ListOfAgentActivity.this, AddAgentActivity.class);
+                Intent i = new Intent(ListOfAgentActivity.this, ModifyAgentActivity.class);
                 finish();
                 startActivity(i);
             }
@@ -74,7 +74,9 @@ public class ListOfAgentActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent i = new Intent(ListOfAgentActivity.this, AddAgentActivity.class);
+            finish();
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);

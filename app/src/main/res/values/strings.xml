@@ -16,4 +16,7 @@
     <string name="add_new_plan">ADD NEW PLAN</string>
     <string name="date_hint">Date</string>
     <string name="add_button">ADD</string>
+    <string name="title_activity_modify_agent">Edit Plan</string>
+    <string name="meeting_starting_time">Meeting Starting Time</string>
+    <string name="meeting_ending_time">Meeting Ending Time</string>
 </resources>

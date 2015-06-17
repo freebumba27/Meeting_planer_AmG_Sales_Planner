@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AmGSalesPlanner.iml" filepath="$PROJECT_DIR$/AmGSalesPlanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Meeting_Scheduler_App-AmG_Sales_Planner.iml" filepath="$PROJECT_DIR$/Meeting_Scheduler_App-AmG_Sales_Planner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/customListviewWithMultipleTextviewmaster/customListviewWithMultipleTextviewmaster.iml" filepath="$PROJECT_DIR$/customListviewWithMultipleTextviewmaster/customListviewWithMultipleTextviewmaster.iml" />
     </modules>
