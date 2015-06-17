@@ -1,114 +1,120 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context="com.amgeneralinsurance.amgsalesplanner.AddAgentActivity"
     android:background="@drawable/bg">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutLogoLayout"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:gravity="center">
-
-        <TextView
-            android:id="@+id/textViewLoginTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/add_new_plan"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="25dp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/linearLayoutLogoLayout"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Agency Name"
-            android:ems="10"
-            android:id="@+id/editTextAgencyName"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:drawable/edit_text" />
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center">
 
-        <android.widget.EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="@string/date_hint"
-            android:ems="10"
-            android:id="@+id/editTextDate"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:drawable/edit_text"
-            android:onClick="datePicker"
-            android:focusable="false"
-            android:clickable="true"/>
+            <TextView
+                android:id="@+id/textViewLoginTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/add_new_plan"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
-        <android.widget.EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="@string/meeting_starting_time"
-            android:ems="10"
-            android:id="@+id/editTextMeetingStartTime"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:drawable/edit_text"
-            android:onClick="timePickerStartingMeeting"
-            android:focusable="false"
-            android:clickable="true"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/SpinnerAgencyName"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:drawable/edit_text" />
 
-        <android.widget.EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="@string/meeting_ending_time"
-            android:ems="10"
-            android:id="@+id/editTextMeetingEndTime"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:drawable/edit_text"
-            android:onClick="timePickerEndingMeeting"
-            android:focusable="false"
-            android:clickable="true"/>
+            <android.widget.EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/date_hint"
+                android:ems="10"
+                android:id="@+id/editTextDate"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:drawable/edit_text"
+                android:onClick="datePicker"
+                android:focusable="false"
+                android:clickable="true"/>
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Agency Name"
-            android:ems="10"
-            android:id="@+id/spinnerPurpose"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:drawable/edit_text"
-            android:entries="@array/purpose_options"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:inputType="textMultiLine"
-            android:hint="Agency Objective"
-            android:ems="10"
-            android:id="@+id/editTextObjective"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:drawable/edit_text" />
+            <android.widget.EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/meeting_starting_time"
+                android:ems="10"
+                android:id="@+id/editTextMeetingStartTime"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:drawable/edit_text"
+                android:onClick="timePickerStartingMeeting"
+                android:focusable="false"
+                android:clickable="true"/>
 
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment" />
-        <Button
-            android:id="@+id/buttonLogin"
-            android:layout_width="fill_parent"
-            android:layout_height="35dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/button_color"
-            android:padding="5dp"
-            android:text="@string/add_button"
-            android:textColor="@android:color/white"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:onClick="login" />
+            <android.widget.EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/meeting_ending_time"
+                android:ems="10"
+                android:id="@+id/editTextMeetingEndTime"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:drawable/edit_text"
+                android:onClick="timePickerEndingMeeting"
+                android:focusable="false"
+                android:clickable="true"/>
 
-    </LinearLayout>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Agency Name"
+                android:ems="10"
+                android:id="@+id/spinnerPurpose"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:drawable/edit_text"
+                android:entries="@array/purpose_options"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:inputType="textMultiLine"
+                android:hint="Agency Objective"
+                android:ems="10"
+                android:id="@+id/editTextObjective"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:drawable/edit_text" />
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment" />
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/button_color"
+                android:padding="5dp"
+                android:text="@string/add_button"
+                android:textColor="@android:color/white"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:onClick="addingPlan" />
+        </LinearLayout>
+    </RelativeLayout>
 </ScrollView>
