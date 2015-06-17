@@ -27,7 +27,8 @@
             android:textColor="@android:color/white"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:onClick="login" />
+            android:onClick="planing_an_week"
+            android:clickable="true" />
         <Button
             android:id="@+id/buttonViewYourPlan"
             android:layout_width="fill_parent"

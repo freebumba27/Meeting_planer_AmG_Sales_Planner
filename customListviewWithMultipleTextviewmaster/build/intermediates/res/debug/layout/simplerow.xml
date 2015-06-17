@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/rowTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" 
+        android:text="ABC"
+        android:textStyle="bold"/>
+    
+    <TextView
+        android:id="@+id/rowTextView2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:text="XYZ" 
+        android:layout_below="@+id/rowTextView"/>
+
+</RelativeLayout><!-- From: file:/F:/Development/freelancer_workspace/Youssef%20ZRE%20-%20Tunisia/res/AmGSalesPlanner/customListviewWithMultipleTextviewmaster/src/main/res/layout/simplerow.xml -->
