@@ -141,10 +141,20 @@ public class AddAgentActivity extends AppCompatActivity {
             if (diffInMin > 0) {
                 SQLiteDatabase db = ReuseableClass.createAndOpenDb(this);
                 try {
-                    db.execSQL("insert into plan_tbl (agency_name, agency_id, agency_lat, agency_lng, date, meeting_start_time, meeting_end_time, " +
-                            "purpose, objective) values ('"+agencyName+"','"+agencyCode+"','"+agencyLat+"','"+agencyLng+"','"+editTextDate.getText().toString()+"','"
+                    String inputPattern = "dd-MM-yyyy";
+                    String outputPattern = "yyyyMMdd";
+                    SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+                    SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+                    Log.d("tag", "insert into plan_tbl (agency_name, agency_id, agency_lat, agency_lng, meeting_date, meeting_start_time, meeting_end_time, " +
+                            "purpose, objective, completed, meeting_date_modified) values ('"+agencyName+"','"+agencyCode+"','"+agencyLat+"','"+agencyLng+"','"+editTextDate.getText().toString()+"','"
                             +editTextMeetingStartTime.getText().toString()+"','"+editTextMeetingEndTime.getText().toString()+"','"+spinnerPurpose.getSelectedItem().toString()
-                            +"','"+editTextObjective.getText().toString()+"');");
+                            +"','"+editTextObjective.getText().toString()+"','0', '"+outputFormat.format(inputFormat.parse(editTextDate.getText().toString()))+"');");
+
+                            db.execSQL("insert into plan_tbl (agency_name, agency_id, agency_lat, agency_lng, meeting_date, meeting_start_time, meeting_end_time, " +
+                            "purpose, objective, completed, meeting_date_modified) values ('"+agencyName+"','"+agencyCode+"','"+agencyLat+"','"+agencyLng+"','"+editTextDate.getText().toString()+"','"
+                            +editTextMeetingStartTime.getText().toString()+"','"+editTextMeetingEndTime.getText().toString()+"','"+spinnerPurpose.getSelectedItem().toString()
+                            +"','"+editTextObjective.getText().toString()+"','0', '"+outputFormat.format(inputFormat.parse(editTextDate.getText().toString()))+"');");
 
                     Toast.makeText(this, "Thanks for saving your plan.\nWish you all the best to archive it!!",Toast.LENGTH_LONG).show();
 

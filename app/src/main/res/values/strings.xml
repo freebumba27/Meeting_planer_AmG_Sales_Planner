@@ -20,4 +20,5 @@
     <string name="meeting_starting_time">Meeting Starting Time</string>
     <string name="meeting_ending_time">Meeting Ending Time</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_summary_view">SummaryViewActivity</string>
 </resources>

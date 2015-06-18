@@ -40,17 +40,17 @@ public class ListOfAgentActivity extends AppCompatActivity {
             ((TextView)findViewById(R.id.textViewPlanTitle)).setVisibility(View.INVISIBLE);
             do {
                 Map<String, String> datum = new HashMap<String, String>(9);
-                datum.put("First Line", cur.getString(1));
-                datum.put("Second Line","Meeting Scheduled on: " + cur.getString(5) + " Time: " + cur.getString(6) + "~" + cur.getString(7));
-                datum.put("plan_id", cur.getString(0));
-                datum.put("agency_name", cur.getString(1));
-                datum.put("date", cur.getString(5));
-                datum.put("start_time", cur.getString(6));
-                datum.put("end_time", cur.getString(7));
-                datum.put("purpose", cur.getString(8));
-                datum.put("objective", cur.getString(9));
-                datum.put("outcome", cur.getString(10));
-                datum.put("completed", cur.getString(11));
+                datum.put("First Line", cur.getString(2));
+                datum.put("Second Line","Meeting Scheduled on: " + cur.getString(6) + " Time: " + cur.getString(7) + "~" + cur.getString(8));
+                datum.put("plan_id", cur.getString(1));
+                datum.put("agency_name", cur.getString(2));
+                datum.put("date", cur.getString(6));
+                datum.put("start_time", cur.getString(7));
+                datum.put("end_time", cur.getString(8));
+                datum.put("purpose", cur.getString(9));
+                datum.put("objective", cur.getString(10));
+                datum.put("outcome", cur.getString(11));
+                datum.put("completed", cur.getString(12));
                 data.add(datum);
             }while (cur.moveToNext());
         }

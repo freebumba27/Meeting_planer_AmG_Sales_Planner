@@ -218,12 +218,18 @@ public class ModifyAgentActivity extends AppCompatActivity {
             if (diffInMin > 0) {
                 SQLiteDatabase db = ReuseableClass.createAndOpenDb(this);
                 try {
-                    ContentValues values=new ContentValues();
-                    values.put("date",editTextDate.getText().toString());
+                    String inputPattern = "dd-MM-yyyy";
+                    String outputPattern = "yyyyMMdd";
+                    SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+                    SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+                    ContentValues values = new ContentValues();
+                    values.put("meeting_date",editTextDate.getText().toString());
                     values.put("meeting_start_time",editTextMeetingStartTime.getText().toString());
                     values.put("meeting_end_time",editTextMeetingEndTime.getText().toString());
                     values.put("objective",EditTextObjective.getText().toString());
                     values.put("outcome",editTextOutCome.getText().toString());
+                    values.put("meeting_date_modified",outputFormat.format(inputFormat.parse(editTextDate.getText().toString())));
                     if(checkBoxCompleted.isChecked())
                         values.put("completed",1);
                     else

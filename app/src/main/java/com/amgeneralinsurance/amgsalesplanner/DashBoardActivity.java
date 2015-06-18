@@ -25,4 +25,10 @@ public class DashBoardActivity extends AppCompatActivity {
         finish();
         startActivity(i);
     }
+
+    public void showingPlanSummary(View view) {
+        Intent i = new Intent(this, PlanSummaryActivity.class);
+        finish();
+        startActivity(i);
+    }
 }
