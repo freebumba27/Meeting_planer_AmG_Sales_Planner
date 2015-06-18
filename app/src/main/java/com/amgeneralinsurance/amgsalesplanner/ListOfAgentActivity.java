@@ -3,8 +3,8 @@ package com.amgeneralinsurance.amgsalesplanner;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.utils.ReuseableClass;
 
@@ -36,6 +37,7 @@ public class ListOfAgentActivity extends AppCompatActivity {
         Cursor cur = db.rawQuery("SELECT * FROM plan_tbl", null);
 
         if(cur.moveToNext()) {
+            ((TextView)findViewById(R.id.textViewPlanTitle)).setVisibility(View.INVISIBLE);
             do {
                 Map<String, String> datum = new HashMap<String, String>(9);
                 datum.put("First Line", cur.getString(1));
@@ -47,6 +49,8 @@ public class ListOfAgentActivity extends AppCompatActivity {
                 datum.put("end_time", cur.getString(7));
                 datum.put("purpose", cur.getString(8));
                 datum.put("objective", cur.getString(9));
+                datum.put("outcome", cur.getString(10));
+                datum.put("completed", cur.getString(11));
                 data.add(datum);
             }while (cur.moveToNext());
         }
@@ -76,6 +80,8 @@ public class ListOfAgentActivity extends AppCompatActivity {
                 i.putExtra("end_time", data.get(position).get("end_time"));
                 i.putExtra("purpose", data.get(position).get("purpose"));
                 i.putExtra("objective", data.get(position).get("objective"));
+                i.putExtra("outcome", data.get(position).get("outcome"));
+                i.putExtra("completed", data.get(position).get("completed"));
                 finish();
                 startActivity(i);
             }

@@ -88,6 +88,6 @@
             android:textColor="@android:color/white"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:onClick="login" />
+            android:onClick="registering" />
     </LinearLayout>
 </RelativeLayout>

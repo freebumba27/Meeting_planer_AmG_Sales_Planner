@@ -180,7 +180,6 @@ public class AddAgentActivity extends AppCompatActivity {
         return timeInMilliseconds;
     }
 
-
     class MyData
     {
         public MyData( String spinnerText, String value )

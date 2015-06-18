@@ -3,7 +3,17 @@
     android:layout_height="match_parent"
     tools:context="com.amgeneralinsurance.amgsalesplanner.ListOfAgentActivity"
     android:background="@drawable/bg">
-
+    <TextView
+        android:id="@+id/textViewPlanTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="NO PLAN AVAILABLE"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"/>
     <ListView
         android:id="@+id/myListView"
         android:layout_width="fill_parent"
