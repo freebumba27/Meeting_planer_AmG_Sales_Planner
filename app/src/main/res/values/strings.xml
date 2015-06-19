@@ -10,7 +10,7 @@
     <string name="double_back_press_message">Press again to exit !!</string>
     <string name="plan_your_week">Plan Your Week</string>
     <string name="view_your_plan">View Your Plan</string>
-    <string name="plan_summary">Plan Summary</string>
+    <string name="calendar_summary">Calendar Summary</string>
     <string name="title_activity_list_of_agent">ListOfAgentActivity</string>
     <string name="title_activity_add_agent">AddAgentActivity</string>
     <string name="add_new_plan">ADD NEW PLAN</string>
@@ -21,4 +21,10 @@
     <string name="meeting_ending_time">Meeting Ending Time</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_summary_view">SummaryViewActivity</string>
+    <string name="title_activity_calendar_summary">CalendarSummaryActivity</string>
+    <string name="action_today">Today</string>
+    <string name="action_day_view">Day view</string>
+    <string name="action_three_day_view">3 day view</string>
+    <string name="action_week_view">Week view</string>
+
 </resources>

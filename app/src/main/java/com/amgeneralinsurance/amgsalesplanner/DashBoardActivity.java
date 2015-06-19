@@ -31,4 +31,10 @@ public class DashBoardActivity extends AppCompatActivity {
         finish();
         startActivity(i);
     }
+
+    public void openingCalendarSummary(View view) {
+        Intent i = new Intent(this, CalendarSummaryActivity.class);
+        finish();
+        startActivity(i);
+    }
 }

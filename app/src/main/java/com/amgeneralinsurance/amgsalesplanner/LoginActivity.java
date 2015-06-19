@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "All fields are mandatory !!", Toast.LENGTH_LONG).show();
         }
         else {
-            if(ReuseableClass.getFromPreference("first_name", LoginActivity.this).equalsIgnoreCase(EditTextFirstName.getText().toString()) ||
+            if(ReuseableClass.getFromPreference("first_name", LoginActivity.this).equalsIgnoreCase(EditTextFirstName.getText().toString()) &&
                     ReuseableClass.getFromPreference("empid", LoginActivity.this).equalsIgnoreCase(EditTextEmployeeId.getText().toString()))
             {
                 Intent i = new Intent(this, DashBoardActivity.class);

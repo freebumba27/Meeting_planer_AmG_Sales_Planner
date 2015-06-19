@@ -42,17 +42,17 @@
             android:textStyle="bold"
             android:onClick="showingPlanSummary" />
         <Button
-            android:id="@+id/buttonPlanSummary"
+            android:id="@+id/buttonCalendarSummary"
             android:layout_width="fill_parent"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
             android:background="@color/button_color"
             android:padding="5dp"
-            android:text="@string/plan_summary"
+            android:text="@string/calendar_summary"
             android:textColor="@android:color/white"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:onClick="login" />
+            android:onClick="openingCalendarSummary" />
     </LinearLayout>
 
 </RelativeLayout>

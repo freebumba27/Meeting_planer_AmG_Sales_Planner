@@ -41,7 +41,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 EditTextEmployeeId.getText().toString().length()>0 && EditTextMobile.getText().toString().length()>0 &&
                 EditTextManagerEmail.getText().toString().length()>0) {
             ReuseableClass.saveInPreference("empid", EditTextEmployeeId.getText().toString(), RegistrationActivity.this);
-            ReuseableClass.saveInPreference("first_name", EditTextEmployeeId.getText().toString(), RegistrationActivity.this);
+            ReuseableClass.saveInPreference("first_name", EditTextFirstName.getText().toString(), RegistrationActivity.this);
             ReuseableClass.saveInPreference("manager_email_id", EditTextManagerEmail.getText().toString(), RegistrationActivity.this);
 
             Toast.makeText(this, "Thanks for registering !!", Toast.LENGTH_LONG).show();

@@ -5,4 +5,4 @@
     <item android:drawable="@drawable/list_row_bg_hover" android:state_pressed="true"/>
     <item android:drawable="@drawable/list_row_bg_hover" android:state_pressed="false" android:state_selected="true"/>
  
-</selector><!-- From: file:/E:/Anirban/Projects/my_workspace/ready_prototypes/Meeting_Scheduler_App-AmG_Sales_Planner/customListviewWithMultipleTextviewmaster/src/main/res/drawable/list_row_selector.xml -->
+</selector><!-- From: file:/F:/Development/freelancer_workspace/Luke%20Boyle%20-%20Malaysia/src/App-AmG_Sales_Planner/customListviewWithMultipleTextviewmaster/src/main/res/drawable/list_row_selector.xml -->
