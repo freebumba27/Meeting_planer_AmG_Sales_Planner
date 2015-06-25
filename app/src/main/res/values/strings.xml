@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">AmG Sales Planner</string>
     <string name="action_settings">Add</string>
-    <string name="login_title">Agent Login</string>
+    <string name="login_title">AGENT LOGIN</string>
     <string name="register">I Don\'t Have Account</string>
     <string name="title_activity_dash_board">DashBoardActivity</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_registration">RegistrationActivity</string>
     <string name="double_back_press_message">Press again to exit !!</string>
-    <string name="plan_your_week">Plan Your Week</string>
+    <string name="plan_your_week">PLAN YOUR WEEK</string>
     <string name="view_your_plan">View Your Plan</string>
     <string name="calendar_summary">Calendar Summary</string>
     <string name="title_activity_list_of_agent">ListOfAgentActivity</string>

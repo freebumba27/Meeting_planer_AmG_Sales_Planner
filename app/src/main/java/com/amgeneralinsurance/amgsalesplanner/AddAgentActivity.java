@@ -69,13 +69,13 @@ public class AddAgentActivity extends AppCompatActivity {
         Cursor cur = db.rawQuery("SELECT * FROM agent_tbl", null);
 
         final MyData items[] = new MyData[cur.getCount()+1];
-        items[0] = new MyData( "Select Agency", "0" );
+        items[0] = new MyData( "Select Agency", "0", "0", "0" );
         if(cur.moveToNext())
         {
             int i = 1;
             do
             {
-                items[i] = new MyData( cur.getString(2),cur.getString(1) );
+                items[i] = new MyData( cur.getString(2),cur.getString(1),cur.getString(3),cur.getString(4) );
                 i++;
             }while (cur.moveToNext());
         }
@@ -89,9 +89,11 @@ public class AddAgentActivity extends AppCompatActivity {
               {
                   public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
                   {
-                      agencyLat = "4.231592";
-                      agencyLng = "103.425352";
                       MyData d = items[position];
+
+                      agencyLat = d.getLat();
+                      agencyLng = d.getLng();
+
                       mMap.clear();
                       if (mMap != null) {
                           mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(agencyLat), Double.parseDouble(agencyLng))).title(d.getSpinnerText()));
@@ -192,10 +194,12 @@ public class AddAgentActivity extends AppCompatActivity {
 
     class MyData
     {
-        public MyData( String spinnerText, String value )
+        public MyData( String spinnerText, String value,  String lat, String lng)
         {
             this.spinnerText = spinnerText;
             this.value = value;
+            this.lat = lat;
+            this.lng = lng;
         }
 
         public String getSpinnerText() {
@@ -212,6 +216,16 @@ public class AddAgentActivity extends AppCompatActivity {
 
         String spinnerText;
         String value;
+        String lat;
+        String lng;
+
+        public String getLat() {
+            return lat;
+        }
+
+        public String getLng() {
+            return lng;
+        }
     }
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END name value pair Spinner

@@ -22,7 +22,7 @@
             android:layout_height="35dp"
             android:layout_marginBottom="30dp"
             android:layout_marginTop="10dp"
-            android:text="Register Me"
+            android:text="REGISTER ME"
             android:textColor="@android:color/secondary_text_light"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="25dp"

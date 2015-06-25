@@ -1,9 +1,12 @@
 package com.amgeneralinsurance.amgsalesplanner;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import com.alamkanak.weekview.DateTimeInterpreter;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
+import com.utils.ReuseableClass;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -143,27 +147,73 @@ public class CalendarSummaryActivity extends AppCompatActivity implements WeekVi
         @Override
         public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
 
-                // Populate the week view with some events.
                 List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
-                if(newMonth == 5) {
-                        Calendar startTime = Calendar.getInstance();
-                        startTime.set(Calendar.HOUR_OF_DAY, 6);
-                        startTime.set(Calendar.MINUTE, 0);
-                        startTime.set(Calendar.DATE, 19);
-                        startTime.set(Calendar.MONTH, 5);
-                        startTime.set(Calendar.YEAR, 2015);
-                        Calendar endTime = (Calendar) startTime.clone();
-                        endTime.set(Calendar.HOUR_OF_DAY, 7);
-                        endTime.set(Calendar.MINUTE, 30);
-                        endTime.set(Calendar.DATE, 19);
-                        endTime.set(Calendar.MONTH, 5);
-                        endTime.set(Calendar.YEAR, 2015);
-                        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
-                        event.setColor(getResources().getColor(R.color.event_color_01));
-                        event.setName("Meeting with John");
-                        events.add(event);
+                SQLiteDatabase db = ReuseableClass.createAndOpenDb(this);
+                String sql = "SELECT * FROM plan_tbl WHERE meeting_date_modified >='"+ newYear+String.format("%02d", (newMonth-1))+"01' AND " +
+                        "meeting_date_modified <='" + newYear+String.format("%02d", (newMonth-1))+31+"'";
+                Log.i("TAG", sql);
+                Cursor cur = db.rawQuery(sql, null);
+
+                String DateArray[]              = new String[cur.getCount()];
+                String MonthArray[]             = new String[cur.getCount()];
+                String YearArray[]              = new String[cur.getCount()];
+                String StartTimeHourArray[]     = new String[cur.getCount()];
+                String StartTimeMinArray[]      = new String[cur.getCount()];
+                String EndTimeHourArray[]       = new String[cur.getCount()];
+                String EndTimeMinArray[]        = new String[cur.getCount()];
+                String ObjArray[]               = new String[cur.getCount()];
+                String CompletedArray[]               = new String[cur.getCount()];
+
+                if(cur.moveToNext()) {
+                        int i = 0;
+                        do {
+                                DateArray[i] = cur.getString(6).substring(0,2);
+                                MonthArray[i] = cur.getString(6).substring(3,5);
+                                YearArray[i] = cur.getString(6).substring(6,10);
+                                StartTimeHourArray[i] = cur.getString(7).substring(0,2);
+                                StartTimeMinArray[i] = cur.getString(7).substring(3,5);
+                                EndTimeHourArray[i] = cur.getString(8).substring(0,2);
+                                EndTimeMinArray[i] = cur.getString(8).substring(3,5);
+                                ObjArray[i] = cur.getString(10);
+                                CompletedArray[i] = cur.getString(12);
+
+                                Log.i("TAG", cur.getString(6).substring(0,2));
+                                Log.i("TAG", cur.getString(6).substring(3,5));
+                                Log.i("TAG", cur.getString(6).substring(6,10));
+                                Log.i("TAG", cur.getString(7).substring(0,2));
+                                Log.i("TAG", cur.getString(7).substring(3,5));
+                                Log.i("TAG", cur.getString(8).substring(0,2));
+                                Log.i("TAG", cur.getString(8).substring(3,5));
+                                Log.i("TAG", cur.getString(10));
+                                Log.i("TAG", cur.getString(12));
+
+                                Calendar startTime = Calendar.getInstance();
+                                startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(StartTimeHourArray[i]));
+                                startTime.set(Calendar.MINUTE, Integer.parseInt(StartTimeMinArray[i]));
+                                startTime.set(Calendar.DATE, Integer.parseInt(DateArray[i]));
+                                startTime.set(Calendar.MONTH, (Integer.parseInt(MonthArray[i])-1));
+                                startTime.set(Calendar.YEAR, newYear);
+                                Calendar endTime = (Calendar) startTime.clone();
+                                endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(EndTimeHourArray[i]));
+                                endTime.set(Calendar.MINUTE, Integer.parseInt(EndTimeMinArray[i]));
+                                endTime.set(Calendar.DATE, Integer.parseInt(DateArray[i]));
+                                endTime.set(Calendar.MONTH, (Integer.parseInt(MonthArray[i])-1));
+                                endTime.set(Calendar.YEAR, newYear);
+                                WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
+                                if(CompletedArray[i].equalsIgnoreCase("1"))
+                                        event.setColor(getResources().getColor(R.color.event_color_green));
+                                else
+                                        event.setColor(getResources().getColor(R.color.event_color_red));
+                                event.setName(ObjArray[i]);
+                                events.add(event);
+
+                                i++;
+                        }while (cur.moveToNext());
                 }
+                cur.close();
+                db.close();
+
                 return events;
         }
 

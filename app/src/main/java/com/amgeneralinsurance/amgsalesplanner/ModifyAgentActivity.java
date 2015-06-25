@@ -15,8 +15,12 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.utils.ReuseableClass;
 
 import java.text.SimpleDateFormat;
@@ -36,6 +40,8 @@ public class ModifyAgentActivity extends AppCompatActivity {
     EditText editTextOutCome;
     CheckBox checkBoxCompleted;
     String plan_id = "nothing";
+    private String lat = "0";
+    private String lng = "0";
 
 
     @Override
@@ -61,10 +67,25 @@ public class ModifyAgentActivity extends AppCompatActivity {
         EditTextPurpose.setText(getIntent().getStringExtra("purpose"));
         EditTextObjective.setText(getIntent().getStringExtra("objective"));
         editTextOutCome.setText(getIntent().getStringExtra("outcome"));
+        lat = getIntent().getStringExtra("lat");
+        lng = getIntent().getStringExtra("lng");
         if(getIntent().getStringExtra("completed").equalsIgnoreCase("0"))
             checkBoxCompleted.setChecked(false);
         else
             checkBoxCompleted.setChecked(true);
+
+        mMap.clear();
+        if (mMap != null) {
+            mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng))).title(getIntent().getStringExtra("objective")));
+        }
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng))) // Center Set
+                .zoom(18.0f)                // Zoom
+                .bearing(90)                // Orientation of the camera to east
+                .tilt(30)                   // Tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
     @Override

@@ -51,6 +51,8 @@ public class ListOfAgentActivity extends AppCompatActivity {
                 datum.put("objective", cur.getString(10));
                 datum.put("outcome", cur.getString(11));
                 datum.put("completed", cur.getString(12));
+                datum.put("lat", cur.getString(4));
+                datum.put("lng", cur.getString(5));
                 data.add(datum);
             }while (cur.moveToNext());
         }
@@ -82,6 +84,8 @@ public class ListOfAgentActivity extends AppCompatActivity {
                 i.putExtra("objective", data.get(position).get("objective"));
                 i.putExtra("outcome", data.get(position).get("outcome"));
                 i.putExtra("completed", data.get(position).get("completed"));
+                i.putExtra("lat", data.get(position).get("lat"));
+                i.putExtra("lng", data.get(position).get("lng"));
                 finish();
                 startActivity(i);
             }
