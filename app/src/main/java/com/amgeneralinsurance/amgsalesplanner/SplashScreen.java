@@ -8,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
+import com.utils.ReuseableClass;
+
 
 public class SplashScreen extends Activity {
     boolean backPressed = false;
@@ -26,7 +28,12 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
                 if (!backPressed) {
-                    Intent myIntent = new Intent(SplashScreen.this, LoginActivity.class);
+                    Intent myIntent = null;
+                    if(ReuseableClass.getFromPreference("empid", SplashScreen.this).equalsIgnoreCase(""))
+                        myIntent = new Intent(SplashScreen.this, RegistrationActivity.class);
+                    else
+                        myIntent = new Intent(SplashScreen.this, DashBoardActivity.class);
+
                     finish();
                     startActivity(myIntent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +18,9 @@ import com.utils.ReuseableClass;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
 public class PlanSummaryActivity extends AppCompatActivity {
 
@@ -35,6 +38,9 @@ public class PlanSummaryActivity extends AppCompatActivity {
         textViewCompleteValue   = (TextView)findViewById(R.id.textViewCompleteValue);
         textViewRemainingValue  = (TextView)findViewById(R.id.textViewRemainingValue);
 
+        textViewSelectMonth.setSelection(Arrays.asList(getResources().getStringArray(R.array.all_months))
+                .indexOf((String) android.text.format.DateFormat.format("MMMM", new Date())));
+        ((Button)findViewById(R.id.buttonGetDetails)).performClick();
     }
 
     @Override

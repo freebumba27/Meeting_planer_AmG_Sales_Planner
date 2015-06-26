@@ -16,6 +16,10 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText EditTextEmployeeId;
     EditText EditTextMobile;
     EditText EditTextManagerEmail;
+
+    private static final int TIME_INTERVAL = 2000;
+    private long mBackPressed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +33,16 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        Intent i = new Intent(this, LoginActivity.class);
-        finish();
-        startActivity(i);
+    public void onBackPressed()
+    {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
+        {
+            super.onBackPressed();
+            return;
+        }
+        else { Toast.makeText(getBaseContext(), getString(R.string.double_back_press_message), Toast.LENGTH_SHORT).show(); }
+
+        mBackPressed = System.currentTimeMillis();
     }
 
     public void registering(View view) {
@@ -43,9 +53,13 @@ public class RegistrationActivity extends AppCompatActivity {
             ReuseableClass.saveInPreference("empid", EditTextEmployeeId.getText().toString(), RegistrationActivity.this);
             ReuseableClass.saveInPreference("first_name", EditTextFirstName.getText().toString(), RegistrationActivity.this);
             ReuseableClass.saveInPreference("manager_email_id", EditTextManagerEmail.getText().toString(), RegistrationActivity.this);
+            ReuseableClass.saveInPreference("name", EditTextFirstName.getText().toString() + " " +
+                    EditTextLastName.getText().toString(), RegistrationActivity.this);
 
             Toast.makeText(this, "Thanks for registering !!", Toast.LENGTH_LONG).show();
-            onBackPressed();
+            Intent i = new Intent(this, DashBoardActivity.class);
+            finish();
+            startActivity(i);
         }
         else {
             Toast.makeText(this, "All fields are mandatory !!", Toast.LENGTH_LONG).show();

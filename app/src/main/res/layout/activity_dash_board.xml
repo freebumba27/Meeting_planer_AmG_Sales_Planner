@@ -16,6 +16,15 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/company_logo"
+            android:layout_marginBottom="20dp"/>
+
         <Button
             android:id="@+id/buttonPlanYourWeek"
             android:layout_width="fill_parent"
@@ -53,6 +62,22 @@
             android:textSize="18dp"
             android:textStyle="bold"
             android:onClick="openingCalendarSummary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ABC XYZ"
+            android:id="@+id/textViewName"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_marginTop="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EMP123"
+            android:id="@+id/textViewId"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
 </RelativeLayout>

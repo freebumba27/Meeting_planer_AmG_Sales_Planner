@@ -38,6 +38,7 @@ public class CalendarSummaryActivity extends AppCompatActivity implements WeekVi
 
                 // Get a reference for the week view in the layout.
                 mWeekView = (WeekView) findViewById(R.id.weekView);
+                mWeekView.goToHour(9);
 
                 // Show a toast message about the touched event.
                 mWeekView.setOnEventClickListener(this);

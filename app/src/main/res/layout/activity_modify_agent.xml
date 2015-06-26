@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:inputType="textMultiLine"
-                android:hint="Outcome"
+                android:hint="Outcome / Action"
                 android:ems="10"
                 android:id="@+id/editTextOutCome"
                 android:layout_gravity="center_horizontal"

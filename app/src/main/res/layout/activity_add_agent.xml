@@ -31,12 +31,15 @@
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:inputType="textPersonName"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="4dp"
                 android:ems="10"
                 android:id="@+id/SpinnerAgencyName"
                 android:layout_gravity="center_horizontal"
-                android:background="@android:drawable/edit_text" />
+                android:background="@drawable/spinner_bg" />
 
             <android.widget.EditText
                 android:layout_width="match_parent"
@@ -79,13 +82,16 @@
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:inputType="textPersonName"
                 android:hint="Agency Name"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="4dp"
                 android:ems="10"
                 android:id="@+id/spinnerPurpose"
                 android:layout_gravity="center_horizontal"
-                android:background="@android:drawable/edit_text"
+                android:background="@drawable/spinner_bg"
                 android:entries="@array/purpose_options"/>
             <EditText
                 android:layout_width="match_parent"

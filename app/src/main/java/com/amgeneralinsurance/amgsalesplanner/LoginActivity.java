@@ -43,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-
 //        Intent i = new Intent(this, DashBoardActivity.class);
 //        finish();
 //        startActivity(i);
@@ -61,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //
     @Override
     public void onBackPressed()
     {
