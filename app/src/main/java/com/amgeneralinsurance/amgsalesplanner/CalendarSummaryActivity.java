@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class CalendarSummaryActivity extends AppCompatActivity implements WeekView.MonthChangeListener,
-        WeekView.EventClickListener, WeekView.EventLongPressListener{
+        WeekView.EventClickListener, WeekView.EmptyViewClickListener{
 
         private static final int TYPE_DAY_VIEW = 1;
         private static final int TYPE_THREE_DAY_VIEW = 2;
@@ -40,18 +40,9 @@ public class CalendarSummaryActivity extends AppCompatActivity implements WeekVi
                 mWeekView = (WeekView) findViewById(R.id.weekView);
                 mWeekView.goToHour(9);
 
-                // Show a toast message about the touched event.
                 mWeekView.setOnEventClickListener(this);
-
-                // The week view has infinite scrolling horizontally. We have to provide the events of a
-                // month every time the month changes on the week view.
                 mWeekView.setMonthChangeListener(this);
-
-                // Set long press listener for events.
-                mWeekView.setEventLongPressListener(this);
-
-                // Set up a date time interpreter to interpret how the date and time will be formatted in
-                // the week view. This is optional.
+                mWeekView.setEmptyViewClickListener(this);
                 setupDateTimeInterpreter(false);
         }
 
@@ -156,6 +147,7 @@ public class CalendarSummaryActivity extends AppCompatActivity implements WeekVi
                 Log.i("TAG", sql);
                 Cursor cur = db.rawQuery(sql, null);
 
+                String idArray[]                = new String[cur.getCount()];
                 String DateArray[]              = new String[cur.getCount()];
                 String MonthArray[]             = new String[cur.getCount()];
                 String YearArray[]              = new String[cur.getCount()];
@@ -164,21 +156,24 @@ public class CalendarSummaryActivity extends AppCompatActivity implements WeekVi
                 String EndTimeHourArray[]       = new String[cur.getCount()];
                 String EndTimeMinArray[]        = new String[cur.getCount()];
                 String ObjArray[]               = new String[cur.getCount()];
-                String CompletedArray[]               = new String[cur.getCount()];
+                String CompletedArray[]         = new String[cur.getCount()];
 
                 if(cur.moveToNext()) {
                         int i = 0;
                         do {
-                                DateArray[i] = cur.getString(6).substring(0,2);
-                                MonthArray[i] = cur.getString(6).substring(3,5);
-                                YearArray[i] = cur.getString(6).substring(6,10);
-                                StartTimeHourArray[i] = cur.getString(7).substring(0,2);
-                                StartTimeMinArray[i] = cur.getString(7).substring(3,5);
-                                EndTimeHourArray[i] = cur.getString(8).substring(0,2);
-                                EndTimeMinArray[i] = cur.getString(8).substring(3,5);
-                                ObjArray[i] = cur.getString(10);
-                                CompletedArray[i] = cur.getString(12);
+                                idArray[i]              = cur.getString(1);
+                                DateArray[i]            = cur.getString(6).substring(0,2);
+                                MonthArray[i]           = cur.getString(6).substring(3,5);
+                                YearArray[i]            = cur.getString(6).substring(6,10);
+                                StartTimeHourArray[i]   = cur.getString(7).substring(0,2);
+                                StartTimeMinArray[i]    = cur.getString(7).substring(3,5);
+                                EndTimeHourArray[i]     = cur.getString(8).substring(0,2);
+                                EndTimeMinArray[i]      = cur.getString(8).substring(3,5);
+                                ObjArray[i]             = cur.getString(10);
+                                CompletedArray[i]       = cur.getString(12);
 
+                                Log.i("TAG", cur.getString(0));
+                                Log.i("TAG", cur.getString(6).substring(3,5));
                                 Log.i("TAG", cur.getString(6).substring(0,2));
                                 Log.i("TAG", cur.getString(6).substring(3,5));
                                 Log.i("TAG", cur.getString(6).substring(6,10));
@@ -207,6 +202,7 @@ public class CalendarSummaryActivity extends AppCompatActivity implements WeekVi
                                 else
                                         event.setColor(getResources().getColor(R.color.event_color_red));
                                 event.setName(ObjArray[i]);
+                                event.setId(Long.parseLong(idArray[i]));
                                 events.add(event);
 
                                 i++;
@@ -224,11 +220,57 @@ public class CalendarSummaryActivity extends AppCompatActivity implements WeekVi
 
         @Override
         public void onEventClick(WeekViewEvent event, RectF eventRect) {
-                //Toast.makeText(CalendarSummaryActivity.this, "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CalendarSummaryActivity.this, "Clicked " + event.getId(), Toast.LENGTH_SHORT).show();
+
+                SQLiteDatabase db = ReuseableClass.createAndOpenDb(this);
+                Cursor cur = db.rawQuery("SELECT * FROM plan_tbl WHERE id='"+event.getId()+"'", null);
+
+                if(cur.moveToNext()) {
+                        do {
+                                Intent i = new Intent(CalendarSummaryActivity.this, ModifyAgentActivity.class);
+                                i.putExtra("plan_id", cur.getString(1));
+                                i.putExtra("agency_name", cur.getString(2));
+                                i.putExtra("date", cur.getString(6));
+                                i.putExtra("start_time", cur.getString(7));
+                                i.putExtra("end_time", cur.getString(8));
+                                i.putExtra("purpose", cur.getString(9));
+                                i.putExtra("objective", cur.getString(10));
+                                i.putExtra("outcome", cur.getString(11));
+                                i.putExtra("completed", cur.getString(12));
+                                i.putExtra("action_required", cur.getString(13));
+                                i.putExtra("lat", cur.getString(4));
+                                i.putExtra("lng", cur.getString(5));
+                                i.putExtra("coming_from", "calender_activity");
+                                finish();
+                                startActivity(i);
+
+                        }while (cur.moveToNext());
+                }
+                cur.close();
+                db.close();
         }
 
         @Override
-        public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
-                //Toast.makeText(CalendarSummaryActivity.this, "Long pressed event: " + event.getName(), Toast.LENGTH_SHORT).show();
+        public void onEmptyViewClicked(Calendar time) {
+                Log.d("TAG","onEmptyViewClicked");
+                /*
+                time.get(Calendar.HOUR_OF_DAY),
+                time.get(Calendar.MINUTE),
+                time.get(Calendar.DAY_OF_MONTH)
+                time.get(Calendar.MONTH)+1,
+                time.get(Calendar.YEAR),
+                */
+
+                Intent i = new Intent(CalendarSummaryActivity.this, AddAgentActivity.class);
+                i.putExtra("Date",String.format("%02d", time.get(Calendar.DAY_OF_MONTH))+"-"+
+                                  String.format("%02d", time.get(Calendar.MONTH) + 1)+"-"+
+                                  String.format("%02d", time.get(Calendar.YEAR) ));
+                i.putExtra("StartTime",String.format("%02d", time.get(Calendar.HOUR_OF_DAY))+":"+
+                                  String.format("%02d", time.get(Calendar.MINUTE)));
+                i.putExtra("EndTime",String.format("%02d", time.get(Calendar.HOUR_OF_DAY) + 1)+":"+
+                        String.format("%02d", time.get(Calendar.MINUTE)));
+                i.putExtra("coming_from", "calender_activity");
+                finish();
+                startActivity(i);
         }
 }

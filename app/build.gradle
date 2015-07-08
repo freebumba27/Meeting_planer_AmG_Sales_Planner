@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.android.gms:play-services:7.3.0'
     compile project(':library')
+    compile files('libs/opencsv-3.4.jar')
 }

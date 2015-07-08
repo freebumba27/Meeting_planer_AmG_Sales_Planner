@@ -29,17 +29,18 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <Spinner
+            <AutoCompleteTextView
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="48dp"
                 android:inputType="textPersonName"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="2dp"
                 android:ems="10"
-                android:id="@+id/SpinnerAgencyName"
+                android:id="@+id/AutoCompleteAgencyName"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/spinner_bg" />
+                android:hint="Type Agency Name"
+                android:background="@android:drawable/edit_text" />
 
             <android.widget.EditText
                 android:layout_width="match_parent"

@@ -13,14 +13,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.opencsv.CSVWriter;
 import com.utils.ReuseableClass;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class PlanSummaryActivity extends AppCompatActivity {
 
@@ -90,7 +93,6 @@ public class PlanSummaryActivity extends AppCompatActivity {
 
             int year = Calendar.getInstance().get(Calendar.YEAR);
 
-            String emailBody = "";
             String sql = "select * from plan_tbl Where meeting_date_modified >= "+year+month+"01 AND meeting_date_modified <= "+year+month+"31";
             Log.d("TAG", "SQL: "+ sql);
             SQLiteDatabase db = ReuseableClass.createAndOpenDb(this);
@@ -98,18 +100,26 @@ public class PlanSummaryActivity extends AppCompatActivity {
             String totalPlan = cur.getCount()+"";
             textViewTotalValue.setText(": " + totalPlan);
 
+            try {
+                String csv = "/sdcard/"+ReuseableClass.getFromPreference("empid",PlanSummaryActivity.this)+".csv";
+                CSVWriter writer = new CSVWriter(new FileWriter(csv));
 
-            if (cur.moveToNext()) {
-                do {
-                    Log.d("TAG", cur.getString(2));
-
-                    emailBody += "Agency Name: " + cur.getString(2) + " || Meeting Date: " + cur.getString(6)
-                            + " || Meeting Starts: " + cur.getString(7) + " || Meeting Ends: " + cur.getString(8)
-                            + " || Purpose: " + cur.getString(9) + " || Objective: " + cur.getString(10)
-                            + " || Status: "+ ( cur.getString(12).equalsIgnoreCase("0") ? "COMPLETED" : "ON PROGRESS" )+"\n\n\n";
-                } while (cur.moveToNext());
+                List<String[]> data = new ArrayList<String[]>();
+                data.add(new String[] {"Agency Name", "Meeting Date", "Meeting Starts", "Meeting Ends", "Purpose", "Objective", "Status"});
+                if (cur.moveToNext()) {
+                    do {
+                        data.add(new String[] {cur.getString(2), cur.getString(6), cur.getString(7), cur.getString(8),
+                                cur.getString(9), cur.getString(10),cur.getString(12).equalsIgnoreCase("0") ? "IN PROGRESS" : "COMPLETED" });
+                    } while (cur.moveToNext());
+                }
+                cur.close();
+                writer.writeAll(data);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            cur.close();
+
+
 
             String sql1 = "select * from plan_tbl Where meeting_date_modified >= "+year+month+"01 AND meeting_date_modified <= "+year+month+"31 AND completed ==1";
             Log.d("TAG", "SQL: "+ sql1);
@@ -124,21 +134,6 @@ public class PlanSummaryActivity extends AppCompatActivity {
             String remaining = cur2.getCount()+"";
             textViewRemainingValue.setText(": " + remaining);
             cur2.close();
-
-            try {
-                File myFile = new File("/sdcard/"+ReuseableClass.getFromPreference("empid",PlanSummaryActivity.this)+".txt");
-                myFile.createNewFile();
-                FileOutputStream fOut = new FileOutputStream(myFile);
-                OutputStreamWriter myOutWriter =
-                        new OutputStreamWriter(fOut);
-                myOutWriter.append(emailBody);
-                myOutWriter.close();
-                fOut.close();
-            } catch (Exception e) {
-                Toast.makeText(getBaseContext(), e.getMessage(),
-                        Toast.LENGTH_SHORT).show();
-            }
-
             db.close();
         }
     }
@@ -158,7 +153,7 @@ public class PlanSummaryActivity extends AppCompatActivity {
                     ReuseableClass.getFromPreference("empid", PlanSummaryActivity.this) + ")");
 
             intent.putExtra(Intent.EXTRA_TEXT, "Please Find the attachment for the details.");
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File("/sdcard/" + ReuseableClass.getFromPreference("empid", PlanSummaryActivity.this) + ".txt")));
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File("/sdcard/" + ReuseableClass.getFromPreference("empid", PlanSummaryActivity.this) + ".csv")));
 
             intent.setType("message/rfc822");
             intent.setPackage("com.google.android.gm");

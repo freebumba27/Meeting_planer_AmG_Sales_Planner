@@ -39,9 +39,11 @@ public class ModifyAgentActivity extends AppCompatActivity {
     EditText EditTextObjective;
     EditText editTextOutCome;
     CheckBox checkBoxCompleted;
+    CheckBox checkBoxActionRequired;
     String plan_id = "nothing";
     private String lat = "0";
     private String lng = "0";
+    private String coming_from = "nothing";
 
 
     @Override
@@ -58,6 +60,7 @@ public class ModifyAgentActivity extends AppCompatActivity {
         EditTextObjective        = (EditText)findViewById(R.id.editTextObjective);
         editTextOutCome          = (EditText)findViewById(R.id.editTextOutCome);
         checkBoxCompleted        = (CheckBox)findViewById(R.id.checkBoxCompleted);
+        checkBoxActionRequired   = (CheckBox)findViewById(R.id.checkBoxActionRequired);
 
         plan_id = getIntent().getStringExtra("plan_id");
         editTextDate.setText(getIntent().getStringExtra("date"));
@@ -69,10 +72,19 @@ public class ModifyAgentActivity extends AppCompatActivity {
         editTextOutCome.setText(getIntent().getStringExtra("outcome"));
         lat = getIntent().getStringExtra("lat");
         lng = getIntent().getStringExtra("lng");
+        coming_from = getIntent().getStringExtra("coming_from");
+
+        Log.d("TAG", "completed: " + getIntent().getStringExtra("completed"));
+        Log.d("TAG", "action: " + getIntent().getStringExtra("action_required"));
         if(getIntent().getStringExtra("completed").equalsIgnoreCase("0"))
             checkBoxCompleted.setChecked(false);
         else
             checkBoxCompleted.setChecked(true);
+
+        if(getIntent().getStringExtra("action_required").equalsIgnoreCase("0"))
+            checkBoxActionRequired.setChecked(false);
+        else
+            checkBoxActionRequired.setChecked(true);
 
         mMap.clear();
         if (mMap != null) {
@@ -90,9 +102,20 @@ public class ModifyAgentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(this, ListOfAgentActivity.class);
-        finish();
-        startActivity(i);
+        if(coming_from.equalsIgnoreCase("list_of_agent_activity")) {
+            Intent i = new Intent(this, ListOfAgentActivity.class);
+            finish();
+            startActivity(i);
+        }
+        else if(coming_from.equalsIgnoreCase("calender_activity")){
+            Intent i = new Intent(this, CalendarSummaryActivity.class);
+            finish();
+            startActivity(i);
+        }
+        else{
+            Log.d("TAG", "from activity is nothing");
+        }
+
     }
 
     @Override
@@ -256,9 +279,14 @@ public class ModifyAgentActivity extends AppCompatActivity {
                     else
                         values.put("completed",0);
 
+                    if(checkBoxActionRequired.isChecked())
+                        values.put("action_required",1);
+                    else
+                        values.put("action_required",0);
+
                     int id = db.update("plan_tbl",values,"id='"+plan_id+"'",null);
                     Log.d("TAG", "Updated Plan Id: " + id);
-                    Toast.makeText(this, "Thanks for updating your plan.\nWish you all the best to archive it!!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Thanks for updating your plan.\nWish you all the best to archive it !!",Toast.LENGTH_LONG).show();
 
                     Intent i = new Intent(this, ListOfAgentActivity.class);
                     finish();

@@ -117,6 +117,15 @@
                 android:layout_gravity="center_horizontal"
                 android:checked="false" />
 
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ACTION REQUIRED"
+                android:id="@+id/checkBoxActionRequired"
+                android:layout_gravity="center_horizontal"
+                android:checked="false" />
+
+
             <fragment
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
